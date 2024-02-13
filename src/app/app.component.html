@@ -1,0 +1,33 @@
+<body>
+  <!-- Ana HTML sayfasının başlangıcı -->
+
+  <div>
+    <!-- Ana bölüm -->
+
+    <div>
+      <!-- Alt bölüm -->
+
+      <div class="app-container">
+        <!-- Uygulama konteyneri -->
+
+        <h1>Normal Kullanıcı</h1>
+        <!-- Başlık: "Normal Kullanıcı" -->
+
+        <button type="submit" (click)="showKayitOl()">
+          <!-- Buton: KAYIT OL işlevini çağıran fonksiyonu tetikler -->
+          KAYIT OL
+        </button>
+
+        <button type="submit" (click)="showGirisYap()">
+          <!-- Buton: GİRİŞ YAP işlevini çağıran fonksiyonu tetikler -->
+          GİRİŞ YAP
+        </button>
+      </div>
+
+      <router-outlet></router-outlet>
+      <!-- Angular yönlendirme çıkış noktası - dinamik bileşenlerin yerleştirildiği alan -->
+    </div>
+
+  </div>
+  <!-- Ana HTML sayfasının sonu -->
+</body>
