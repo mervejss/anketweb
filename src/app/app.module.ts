@@ -10,12 +10,13 @@ import { GirisYapComponent } from './normal-kullanici-giris-yap/giris-yap.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGirisYapComponent } from './admin-giris-yap/admin-giris-yap.component';
 import { AdminKayitOlComponent } from './admin-kayit-ol/admin-kayit-ol.component';
+import { AdminAnaSayfaComponent } from './admin-ana-sayfa/admin-ana-sayfa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent, AdminAnaSayfaComponent,
     
   ],
   imports: [
