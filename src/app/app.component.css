@@ -9,6 +9,8 @@ body {
   height: 1000px;
 }
 
+
+
 /* Uygulama formunun konteynerı */
 .app-container {
   /* Metni ortalar */
@@ -28,7 +30,10 @@ body {
   padding-top: 1%;
   /* Alt boşluk */
   padding-bottom: 1%;
+
 }
+
+
 
 /* Butonların stil tanımı */
 button[type="submit"] {
@@ -55,4 +60,6 @@ button[type="submit"] {
   border-radius: 7px;
   /* İmleci göster */
   cursor: pointer;
+  margin-right: 10px; /* Aynı satırda olmaları için boşluk ayarı */
+
 }

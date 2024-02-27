@@ -4,16 +4,19 @@ import { FormsModule } from '@angular/forms'; // Burada FormsModule'u içe aktar
 import { RouterModule } from '@angular/router'; // RouterModule'ı eklediğinizden emin olun
 import { AppRoutingModule } from './app-routing.module'; // AppRoutingModule'ı import etmeyi unutmayın
 import { AppComponent } from './app.component';
-import { KayitOlComponent } from './kayit-ol/kayit-ol.component'; // Varsa kayit-ol component'ını da içe aktarın
+import { KayitOlComponent } from './normal-kullanici-kayit-ol/kayit-ol.component'; // Varsa kayit-ol component'ını da içe aktarın
 import { HttpClientModule } from '@angular/common/http'; // HttpClientModule'i ekledik
-import { GirisYapComponent } from './giris-yap/giris-yap.component';
+import { GirisYapComponent } from './normal-kullanici-giris-yap/giris-yap.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminGirisYapComponent } from './admin-giris-yap/admin-giris-yap.component';
+import { AdminKayitOlComponent } from './admin-kayit-ol/admin-kayit-ol.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,
+    
   ],
   imports: [
     BrowserModule,

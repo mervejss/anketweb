@@ -1,11 +1,11 @@
 <body>
   <!-- Ana HTML sayfasının başlangıcı -->
 
-  <div>
+  <div class="main-container">
     <!-- Ana bölüm -->
 
-    <div>
-      <!-- Alt bölüm -->
+    <div class="user-section">
+      <!-- Normal Kullanıcı Bölümü -->
 
       <div class="app-container">
         <!-- Uygulama konteyneri -->
@@ -23,11 +23,31 @@
           GİRİŞ YAP
         </button>
       </div>
-
-      <router-outlet></router-outlet>
-      <!-- Angular yönlendirme çıkış noktası - dinamik bileşenlerin yerleştirildiği alan -->
     </div>
 
+    <div class="admin-section">
+      <!-- Admin (Yönetici) Kullanıcı Bölümü -->
+
+      <div class="app-container">
+        <!-- Uygulama konteyneri -->
+
+        <h1>Admin (Yönetici) Kullanıcı</h1>
+        <!-- Başlık: "Admin (Yönetici) Kullanıcı" -->
+
+        <button type="submit" (click)="showAdminKayitOl()">
+          <!-- Buton: KAYIT OL işlevini çağıran fonksiyonu tetikler -->
+          KAYIT OL
+        </button>
+
+        <button type="submit" (click)="showAdminGirisYap()">
+          <!-- Buton: GİRİŞ YAP işlevini çağıran fonksiyonu tetikler -->
+          GİRİŞ YAP
+        </button>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+    <!-- Angular yönlendirme çıkış noktası - dinamik bileşenlerin yerleştirildiği alan -->
   </div>
   <!-- Ana HTML sayfasının sonu -->
 </body>

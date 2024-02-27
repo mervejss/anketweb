@@ -21,6 +21,15 @@ export class AppComponent {
  showGirisYap() {
     this.router.navigate(['/giris-yap']);
   }
+
+  showAdminKayitOl() {
+    this.router.navigate(['/admin-kayit-ol']);
+  }
+ showAdminGirisYap() {
+    this.router.navigate(['/admin-giris-yap']);
+}
+
+
   onSubmit() {
     const userData = {
       firstName: this.firstName,

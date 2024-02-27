@@ -61,6 +61,48 @@ app.post('/api/login', (req, res) => {
     }
   });
 });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+app.post('/api/admins', (req, res) => {
+  const { firstName, lastName, phoneNumber, email, password } = req.body;
+  pool.query('INSERT INTO admins (first_name, last_name, phone_number, email, password) VALUES ($1, $2, $3, $4, $5)',
+    [firstName, lastName, phoneNumber, email, password],
+    (error, results) => {
+      if (error) {
+        console.error('Veritabanına kayıt eklenirken hata oluştu: ', error);
+        return res.status(500).send('Veritabanına kayıt eklenirken hata oluştu');
+      }
+      console.log('Veritabanına kayıt başarıyla eklendi');
+      return res.status(201).send(`Admin eklendi: ${firstName} ${lastName}`);
+    });
+});
+
+
+app.post('/api/adminlogin', (req, res) => {
+  const { email, password } = req.body;
+
+  // Veritabanında adminin varlığını ve şifresini kontrol et
+  pool.query('SELECT * FROM admins WHERE email = $1 AND password = $2', [email, password], (error, results) => {
+    if (error) {
+      console.error('Veritabanı hatası: ', error);
+      return res.status(500).send('Bir hata oluştu');
+    }
+
+    if (results.rows.length > 0) {
+      // Kullanıcı var, giriş başarılı
+      console.log('Giriş başarılı, Hoş geldiniz');
+
+      return res.status(200).send(`Giriş başarılı, Hoş geldiniz ${results.rows[0].first_name} ${results.rows[0].last_name}!`);
+    } else {
+      console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
+      // Kullanıcı yok veya şifre yanlış
+      return res.status(401).send('E-posta veya şifre hatalı');
+    }
+  });
+});
+
 
 
 
