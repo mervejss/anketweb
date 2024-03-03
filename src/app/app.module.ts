@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGirisYapComponent } from './admin-giris-yap/admin-giris-yap.component';
 import { AdminKayitOlComponent } from './admin-kayit-ol/admin-kayit-ol.component';
 import { AdminAnaSayfaComponent } from './admin-ana-sayfa/admin-ana-sayfa.component';
+import { Page1Component } from './page1/page1.component';
+import { AnaSayfaComponent } from './ana-sayfa/ana-sayfa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent, AdminAnaSayfaComponent,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent,
     
   ],
   imports: [
@@ -25,6 +27,7 @@ import { AdminAnaSayfaComponent } from './admin-ana-sayfa/admin-ana-sayfa.compon
     RouterModule, 
     AppRoutingModule, // AppRoutingModule'ı burada da eklemeyi unutmayın
     HttpClientModule, BrowserAnimationsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

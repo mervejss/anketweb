@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // HttpClient'ı ekledik
 
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-ana-sayfa',
+  templateUrl: './ana-sayfa.component.html',
+  styleUrls: ['./ana-sayfa.component.scss']
 })
-export class AppComponent {
+export class AnaSayfaComponent {
+
   title = 'anketweb';
   firstName: string = '';
   lastName: string = '';
@@ -29,12 +31,6 @@ export class AppComponent {
     this.router.navigate(['/admin-giris-yap']);
 }
 
-showSistemGiris() {
-  this.router.navigate(['/ana-sayfa']);
-}
-showAnaSayfa() {
-  this.router.navigate(['/']);
-}
 
   onSubmit() {
     const userData = {
@@ -50,4 +46,5 @@ showAnaSayfa() {
         console.error('Kayıt sırasında bir hata oluştu:', error);
       });
   }
+  
 }

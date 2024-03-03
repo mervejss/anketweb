@@ -1,0 +1,27 @@
+.admin-panel {
+    display: flex;
+  }
+  
+  .menu-bar {
+    width: 200px;
+    background-color: #ffffff;
+    color: #ff0000;
+    padding: 10px;
+  }
+  
+  .admin-logo {
+    width: 100px; /* Resmin genişliğini panele göre ayarlayın */
+    margin-bottom: 20px; /* İstediğiniz boşluğu belirleyin */
+  }
+  
+  .menu-item {
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px solid #555;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  

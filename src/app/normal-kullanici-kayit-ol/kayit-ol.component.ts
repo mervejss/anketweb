@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kayit-ol',
@@ -13,7 +14,7 @@ export class KayitOlComponent {
   email: any;
   password: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     const data = {
@@ -24,11 +25,12 @@ export class KayitOlComponent {
       password: this.password,
     };
 
-    this.http.post<any>('http://localhost:3000/api/users', data).subscribe(
+    this.http.post<any>('http://localhost:3000/api/users', data, { observe: 'response' }).subscribe(
       (response: HttpResponse<any>) => {
         if (response.status === 201) {
-          console.log('Veritabanına kaydedildi', response);
-          // Gerekli işlemleri burada gerçekleştirebilirsiniz.
+          console.log('Veritabanına kaydedildi', response.body);
+          alert('Kullanıcı başarıyla kaydedildi ! ');
+          this.router.navigate(['/']);
         } else {
           console.error('Bilinmeyen bir hata oluştu.');
         }

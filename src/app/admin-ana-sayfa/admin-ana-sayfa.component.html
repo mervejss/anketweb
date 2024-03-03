@@ -1,1 +1,24 @@
-<p>admin-ana-sayfa works!</p>
+<!-- admin-ana-sayfa.component.html -->
+
+<div class="admin-panel">
+  <div class="menu-bar">
+    <img src="/assets/adminIcon-removebg-preview.png" alt="Admin Logo" class="admin-logo">
+
+    <div class="menu-item" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</div>
+    <div class="menu-item" (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</div>
+  </div>
+
+  <div class="content">
+    <div *ngIf="userInfo">
+      <h3>Kullanıcı Bilgileri:</h3>
+      <p>ID: {{ userInfo.id }}</p>
+      <p>Ad: {{ userInfo.first_name }}</p>
+      <p>Soyad: {{ userInfo.last_name }}</p>
+      <p>Email: {{ userInfo.email }}</p>
+      <!-- Diğer bilgileri de buraya ekleyebilirsiniz -->
+    </div>
+
+    <!-- Sağ taraftaki içerik burada gösterilecek -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

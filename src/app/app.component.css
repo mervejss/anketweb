@@ -22,15 +22,17 @@ body {
   /* Kenar rengi */
   border-color: aqua;
   /* Sağdan ve soldan boşluk */
-  margin-right: 40%;
-  margin-left: 40%;
+  margin-right: 70%;
+  margin-left: 30%;
   /* Alt boşluk */
   margin-bottom: 1%;
   /* Üst boşluk */
   padding-top: 1%;
   /* Alt boşluk */
   padding-bottom: 1%;
-
+  width: 750px;
+  height: 120px;
+  
 }
 
 
@@ -38,8 +40,8 @@ body {
 /* Butonların stil tanımı */
 button[type="submit"] {
   /* Buton boyutları */
-  width: 90px;
-  height: 30px;
+  width: 220px;
+  height: 40px;
   /* İçerik ile kenar arasındaki boşluk */
   padding: 8px;
   /* Alt boşluk */

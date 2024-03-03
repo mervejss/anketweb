@@ -30,6 +30,8 @@ export class GirisYapComponent {
             (response: HttpResponse<any>) => {
                 if (response.status === 200) {
                     console.log('Giriş başarılı', response);
+                    alert('Başarıyla giriş yapıldı ! ');
+                    this.router.navigate(['/']);
 
                     // Giriş başarılıysa yeni sayfaya yönlendirme
                     //this.router.navigate(['/yeni-sayfa']);
