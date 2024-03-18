@@ -34,7 +34,6 @@ export class GirisYapComponent {
                     this.router.navigate(['/']);
 
                     // Giriş başarılıysa yeni sayfaya yönlendirme
-                    //this.router.navigate(['/yeni-sayfa']);
                 } else {
                     console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
                 }

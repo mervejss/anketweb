@@ -11,6 +11,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./admin-giris-yap.component.scss'],
 })
 export class AdminGirisYapComponent implements OnInit {
+  userInfo: { id: number, first_name: string, last_name: string, email: string } | null = null;
+
   email: string = '';
   password: string = '';
   user: any;
@@ -22,13 +24,14 @@ export class AdminGirisYapComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Sayfa yüklendiğinde kullanıcı bilgilerini çek
+    // Kullanıcı bilgilerini alma
     this.authService.getUserInfo().subscribe(
       (userInfo) => {
-        this.user = userInfo;
+        console.log('İlk Giriş - Kullanıcı Bilgileri:', userInfo);
+        //this.userInfo = userInfo;
       },
       (error) => {
-        console.error('Kullanıcı bilgileri alınırken hata oluştu:', error);
+        console.error('İlk Giriş - Kullanıcı bilgileri alınırken hata oluştu:', error);
       }
     );
   }
@@ -43,20 +46,32 @@ export class AdminGirisYapComponent implements OnInit {
       .subscribe(
         (response: HttpResponse<any>) => {
           if (response.body && response.body.status === 200) {
-            this.authService.setAuthToken(response.body.token); // Token'i sakla
+            const authToken = response.body.token; // Token'ı cevaptan al
+            this.authService.setAuthToken(authToken); // AuthService'e token'ı set et
+
             alert('Başarıyla giriş yapıldı!');
 
-            // Kullanıcı bilgilerini alma
-            this.authService.getUserInfo().subscribe(
-              (userInfo) => {
-                console.log('Kullanıcı Bilgileri:', userInfo);
-              },
-              (error) => {
-                console.error('Kullanıcı bilgileri alınırken hata oluştu:', error);
-              }
-            );
+            // index.js içindeki giriş yapıldıktan hemen sonra
+            const storedAuthToken = this.authService.getAuthToken();
+            //console.log('TOKEN ! TOKEN : ', storedAuthToken);
 
-            this.router.navigate(['/admin-ana-sayfa']);
+            if (storedAuthToken) {
+              
+              //console.log('TOKEN BULUNDU ! TOKEN : ', storedAuthToken);
+
+              this.authService.getUserInfo().subscribe(
+                (userInfo) => {
+                  console.log('TOKEN BULUNDU !!!! ', storedAuthToken);
+
+                  console.log('Giriş Sonrası - Kullanıcı Bilgileri:', userInfo);
+                  //this.userInfo = userInfo;
+                },
+                (error) => {
+                  console.error('Giriş Sonrası - Kullanıcı bilgileri alınırken hata oluştu:', error);
+                }
+              );
+              this.router.navigate(['/admin-ana-sayfa']);
+            }
           } else {
             console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
           }

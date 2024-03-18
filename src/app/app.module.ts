@@ -13,6 +13,7 @@ import { AdminKayitOlComponent } from './admin-kayit-ol/admin-kayit-ol.component
 import { AdminAnaSayfaComponent } from './admin-ana-sayfa/admin-ana-sayfa.component';
 import { Page1Component } from './page1/page1.component';
 import { AnaSayfaComponent } from './ana-sayfa/ana-sayfa.component';
+import { AuthService } from './services/auth.service'; // Auth servisini import et
 
 @NgModule({
   declarations: [

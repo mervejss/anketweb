@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,21 +27,31 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.getAuthToken() !== null;
   }
+ // AuthService içindeki getUserInfo metodu
+getUserInfo(): Observable<{ id: number }> {
 
-  getUserInfo(): Observable<any> {
-    const token = this.getAuthToken();
+  const token = this.getAuthToken();
+  console.log('Tsafsafasfas TOKEN : ', token);
 
-    if (token) {
-      // Token varsa, sunucuya gidip kullanıcı bilgilerini çek
-      return this.http.get<any>('http://localhost:3000/api/getUserInfo');
-    } else {
-      // Token yoksa, boş bir observable döndür
-      return new Observable();
-    }
+  if (token) {
+    const headers = { 'Authorization': "Bearer " + token };
+    
+
+    return this.http.post<{ id: 1 }>('http://localhost:3000/api/getUserInfo', { headers }).pipe(
+      
+    catchError(error => {
+        console.error('Sunucu hatası:', error);
+        return throwError('Sunucu hatası oluştu');
+      }),
+      tap(response => {
+        console.log('getUserInfo response:', response); // Bu satır eklenmiş olmalı
+      })
+    );
+  } else {
+    return throwError('Token bulunamadı');
   }
+}
 
-  logout(): void {
-    this.removeAuthToken();
-    // Ek olarak, diğer temizleme işlemlerini de buraya ekleyebilirsiniz
-  }
+
+  
 }

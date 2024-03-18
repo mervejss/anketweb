@@ -9,22 +9,23 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./admin-ana-sayfa.component.scss'],
 })
 export class AdminAnaSayfaComponent implements OnInit {
-  userInfo: any;
+  userInfo: { id: number} | null = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    // Kullanıcı bilgilerini alma
+    console.log('ngOnInit is called');
     this.authService.getUserInfo().subscribe(
       (userInfo) => {
+        console.log('Giriş Sonrası - Kullanıcı Bilgileri:', userInfo);
         this.userInfo = userInfo;
-        console.log('Kullanıcı Bilgileri:', this.userInfo);
       },
       (error) => {
-        console.error('Kullanıcı bilgileri alınırken hata oluştu:', error);
+        console.error('Giriş Sonrası - Kullanıcı bilgileri alınırken hata oluştu:', error);
       }
     );
   }
+  
   
   yeniAnketSorusuEkle() {
     // Yeni anket sorusu ekleme işlemleri
