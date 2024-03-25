@@ -30,7 +30,8 @@ export class AppComponent implements OnInit{
     this.router.navigate(['/admin-kayit-ol']);
   }
  showAdminGirisYap() {
-    this.router.navigate(['/admin-giris-yap']);
+  this.adminService.loggedIn
+  //this.router.navigate(['/admin-giris-yap']);
 }
 
 showSistemCikisYap() {

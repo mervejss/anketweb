@@ -3,12 +3,12 @@
     <img src="/assets/adminIcon-removebg-preview.png" alt="Admin Logo" class="admin-logo">
     
       <!-- Admin bilgilerini yazdırma -->
-      <div *ngIf="adminService.adminInfo">
-        <p>ID: {{ adminService.adminInfo.id }}</p>
-        <p>Ad: {{ adminService.adminInfo.first_name }}</p>
-        <p>Soyad: {{ adminService.adminInfo.last_name }}</p>
-        <p>Telefon: {{ adminService.adminInfo.phone_number }}</p>
-        <p>E-posta: {{ adminService.adminInfo.email }}</p>
+      <div>
+        <p>ID: {{ adminService.loginUser()?.id || " " }}</p>
+        <p>Ad: {{ adminService.loginUser()?.first_name || " " }}</p>
+        <p>Soyad: {{ adminService.loginUser()?.last_name || " " }}</p>
+        <p>Telefon: {{ adminService.loginUser()?.phone_number || " " }}</p>
+        <p>E-posta: {{ adminService.loginUser()?.email || " " }}</p>
       </div>
     
       <button type="submit" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</button>
