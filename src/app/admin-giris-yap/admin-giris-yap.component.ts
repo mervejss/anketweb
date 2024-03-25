@@ -12,12 +12,13 @@ import { AdminService } from '../services/admin.service';
   styleUrls: ['./admin-giris-yap.component.scss'],
 })
 export class AdminGirisYapComponent implements OnInit {
-  ngOnInit(){
-    
+  ngOnInit() {
+
   }
+  adminData: any = {};
 
   loginUserData: any = {};
-  constructor(private http: HttpClient, private router: Router, private _auth: AdminService) {}
+  constructor(private http: HttpClient, private router: Router, private _auth: AdminService) { }
 
 
   loginUser() {
@@ -27,18 +28,28 @@ export class AdminGirisYapComponent implements OnInit {
         (res: any) => {
           console.log("Giriş yapıldı", res);
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/admin-ana-sayfa'])
 
-          // Giriş başarılı olduğunda yönlendirme yapılabilir.
+          //BURADA ADMİNİN VERİLERİNİ ÇEKME APİSİNİ KULLANMAMIZ LAZIM. 
+          // Admin verilerini çekmek için API'yi çağır
+          this._auth.getAdminInfo(this.loginUserData)
+            .subscribe(
+              (adminData: any) => {
+                console.log("Admin verileri alındı", adminData);
+                this.adminData = adminData
+                // Admin verileri başarıyla alındı, yönlendirme yapılabilir
+                this.router.navigate(['/admin-ana-sayfa']);
+              },
+              err => console.log("Admin verileri alınamadı", err)
+            );
+
         },
         err => console.log(err)
       );
   }
 
 
-  
-  }
 
-  
+}
 
-  
+
+

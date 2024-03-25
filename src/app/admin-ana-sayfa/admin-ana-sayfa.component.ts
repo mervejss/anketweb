@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
+
 
 @Component({
   selector: 'app-admin-ana-sayfa',
@@ -7,13 +10,15 @@ import { AdminService } from '../services/admin.service';
   styleUrls: ['./admin-ana-sayfa.component.scss'],
 })
 export class AdminAnaSayfaComponent implements OnInit {
-  adminInfo: any;
 
-  constructor(public adminService: AdminService) {}
+  constructor(private http: HttpClient, private router: Router, private _auth: AdminService) {}
+
 
   ngOnInit(): void {
-    
+
   }
+  
+  
 
   yeniAnketSorusuEkle(): void {
     

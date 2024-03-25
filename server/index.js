@@ -132,7 +132,7 @@ app.post('/api/admins', (req, res) => {
   
       if (user.rows.length > 0) {
         // Kullanıcı var, giriş başarılı
-        console.log('Giriş başarılı, Hoş geldiniz');
+        console.log('Giriş başarılı, Hoş geldiniz' + user.rows[0].id, user.rows[0].phone_number);
         let payload = {subject: user.id}
         let token = jwt.sign(payload, 'secretKey')
         res.status(200).send({token})
@@ -145,7 +145,31 @@ app.post('/api/admins', (req, res) => {
     });
   });
 
+  app.post('/api/admininfo',(req, res) => {
+    let userData = req.body
+  
+       // Veritabanında kullanıcının varlığını ve şifresini kontrol et
+    pool.query('SELECT * FROM admins WHERE email = $1 AND password = $2', [userData.email, userData.password], (error, user) => {
+      if (error) {
+        console.error('Veritabanı hatası: ', error);
+        return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+      }
+  
+      if (user.rows.length > 0) {
+        // Kullanıcı var, giriş başarılı
+        console.log('Bilgiler bulundu ve getirildi : ' + user.rows[0].id,user.rows[0].first_name,user.rows[0].last_name,user.rows[0].phone_number,user.rows[0].email,user.rows[0].password);
+        const userInfo = user.rows[0];
 
+            // Değişkeni response olarak gönder
+            res.status(200).send(userInfo);
+
+      } else {
+        console.error(error);
+        // Kullanıcı yok veya şifre yanlış
+        return res.status(401).json({ status: 401, message: error });
+      }
+    });
+  });
 
 
 

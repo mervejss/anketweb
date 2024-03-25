@@ -3,14 +3,15 @@
     <img src="/assets/adminIcon-removebg-preview.png" alt="Admin Logo" class="admin-logo">
     
       <!-- Admin bilgilerini yazdırma -->
+      
       <div>
-        <p>ID: {{ adminService.loginUser()?.id || " " }}</p>
-        <p>Ad: {{ adminService.loginUser()?.first_name || " " }}</p>
-        <p>Soyad: {{ adminService.loginUser()?.last_name || " " }}</p>
-        <p>Telefon: {{ adminService.loginUser()?.phone_number || " " }}</p>
-        <p>E-posta: {{ adminService.loginUser()?.email || " " }}</p>
+        <p>ID: {{ 1|| " " }}</p>
+        <p>Ad: {{ 1 || " " }}</p>
+        <p>Soyad: {{ 1 || " " }}</p>
+        <p>Telefon: {{ 1   || " " }}</p>
+        <p>E-posta: {{ 1 || " " }}</p>
       </div>
-    
+
       <button type="submit" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</button>
       <button type="submit"  (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</button>
   
@@ -20,3 +21,13 @@
   
 
 </div>
+
+<!--
+<div>
+  <p>ID: {{ adminData.id || " " }}</p>
+  <p>Ad: {{ adminData.first_name || " " }}</p>
+  <p>Soyad: {{ adminData.last_name|| " " }}</p>
+  <p>Telefon: {{ adminData.phone_number   || " " }}</p>
+  <p>E-posta: {{ adminData.email|| " " }}</p>
+</div>
+-->

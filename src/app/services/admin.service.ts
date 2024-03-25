@@ -13,6 +13,7 @@ export class AdminService {
 
   private _registerUrl = "http://localhost:3000/api/admins"
   private _loginUrl = "http://localhost:3000/api/adminlogin"
+  private _adminInfoUrl = "http://localhost:3000/api/admininfo"
 
   constructor(private http: HttpClient,private _router: Router) {}
 
@@ -25,7 +26,12 @@ export class AdminService {
   loginUser(user: any)
   {
     return this.http.post(this._loginUrl, user)
+    
+  }
 
+  getAdminInfo(user: any)
+  {
+    return this.http.post(this._adminInfoUrl, user)
   }
   
   logoutUser() {
