@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // HttpClient'ı ekledik
+import { AdminService } from './services/admin.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'anketweb';
   firstName: string = '';
   lastName: string = '';
   phoneNumber: string = '';
 
-  constructor(private router: Router, private http: HttpClient) {} // HttpClient'ı burada da ekledik
+  constructor(private router: Router, private http: HttpClient, private adminService: AdminService) {} // HttpClient'ı burada da ekledik
 
+  ngOnInit(): void {
+   
+  }
   showKayitOl() {
     this.router.navigate(['/kayit-ol']);
   }
@@ -27,6 +31,11 @@ export class AppComponent {
   }
  showAdminGirisYap() {
     this.router.navigate(['/admin-giris-yap']);
+}
+
+showSistemCikisYap() {
+  this.adminService.logoutUser()
+  
 }
 
 showSistemGiris() {

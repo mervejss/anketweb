@@ -1,7 +1,5 @@
-// admin-ana-sayfa.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-admin-ana-sayfa',
@@ -9,29 +7,23 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./admin-ana-sayfa.component.scss'],
 })
 export class AdminAnaSayfaComponent implements OnInit {
-  userInfo: { id: number} | null = null;
+  anketSorular: any[] | undefined;
+  questionText: string = '';
+  surveyId: number | undefined; // surveyId özelliğini tanımladık
 
-  constructor(private authService: AuthService) {}
+  constructor(public adminService: AdminService) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit is called');
-    this.authService.getUserInfo().subscribe(
-      (userInfo) => {
-        console.log('Giriş Sonrası - Kullanıcı Bilgileri:', userInfo);
-        this.userInfo = userInfo;
-      },
-      (error) => {
-        console.error('Giriş Sonrası - Kullanıcı bilgileri alınırken hata oluştu:', error);
-      }
-    );
-  }
-  
-  
-  yeniAnketSorusuEkle() {
-    // Yeni anket sorusu ekleme işlemleri
+    // Admin bilgilerine erişim örneği
+    console.log(this.adminService.adminInfo);
+    
   }
 
-  anketSorulariniGoruntule() {
-    // Anket sorularını görüntüleme işlemleri
+  yeniAnketSorusuEkle(): void {
+    
+  }
+
+  anketSorulariniGoruntule(): void {
+    
   }
 }

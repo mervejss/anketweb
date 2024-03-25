@@ -1,24 +1,22 @@
-<!-- admin-ana-sayfa.component.html -->
-
 <div class="admin-panel">
   <div class="menu-bar">
     <img src="/assets/adminIcon-removebg-preview.png" alt="Admin Logo" class="admin-logo">
-
-    <div class="menu-item" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</div>
-    <div class="menu-item" (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</div>
-  </div>
-
-  <div class="content">
     
-    <div *ngIf="userInfo">
-      <h3>Kullanıcı Bilgileri:</h3>
-      <p>ID: {{ userInfo.id }}</p>
-      
-      <!-- Diğer bilgileri de buraya ekleyebilirsiniz -->
-    </div>
+      <!-- Admin bilgilerini yazdırma -->
+      <div *ngIf="adminService.adminInfo">
+        <p>ID: {{ adminService.adminInfo.id }}</p>
+        <p>Ad: {{ adminService.adminInfo.first_name }}</p>
+        <p>Soyad: {{ adminService.adminInfo.last_name }}</p>
+        <p>Telefon: {{ adminService.adminInfo.phone_number }}</p>
+        <p>E-posta: {{ adminService.adminInfo.email }}</p>
+      </div>
     
-
-    <!-- Sağ taraftaki içerik burada gösterilecek -->
+      <button type="submit" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</button>
+      <button type="submit"  (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</button>
+  
     <router-outlet></router-outlet>
   </div>
+
+  
+
 </div>
