@@ -17,12 +17,13 @@ import { AnaSayfaComponent } from './ana-sayfa/ana-sayfa.component';
 import { AdminService } from './services/admin.service';
 import { AuthGuard } from './services/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AdminAnketlerPage1Component } from './admin-anketler-page1/admin-anketler-page1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent, AdminAnketlerPage1Component,
     
   ],
   imports: [

@@ -1,9 +1,19 @@
 .admin-panel {
     display: flex;
-  }
   
+    width:max-content ;
+    min-height: 1000px; /* Minimum genişlik 1000px */
+
+    height: auto;
+    
+  }
+  .anket-sorulari-content {
+    margin-left: 220px; /* Menü çubuğundan sağa biraz boşluk bırakmak için */
+    /* İstediğiniz diğer stil ayarları */
+  }
   .menu-bar {
     width: 500px;
+    height: 400px;
     background-color: #ffffff;
     color: #ff0000;
     padding: 10px;
@@ -52,5 +62,8 @@
   .content {
     flex-grow: 1;
     padding: 20px;
+    min-height: 100vh;
+
   }
  
+  

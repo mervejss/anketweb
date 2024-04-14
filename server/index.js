@@ -174,6 +174,109 @@ app.post('/api/admins', (req, res) => {
 
 
 
+ /* app.get('/api/questions', (req, res) => {
+    pool.query('SELECT * FROM questions', (error, queryResult) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+        }
+
+        if (queryResult.rows.length > 0) {
+            // Soru var, soru getirme başarılı
+            console.log('Bilgiler bulundu ve getirildi : ' + queryResult.rows);
+            // Değişkeni response olarak gönder
+            const questionInfo = queryResult.rows[0];
+
+            res.status(200).send(questionInfo);
+        } else {
+            console.error(error);
+            // Kullanıcı yok veya şifre yanlış
+            return res.status(401).json({ status: 401, message: 'Soru bulunamadı' });
+        }
+    });
+});*/
+app.get('/api/questions', (req, res) => {
+    pool.query('SELECT * FROM questions', (error, queryResult) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+        }
+
+        if (queryResult.rows.length > 0) {
+            // Sorular bulundu, başarılı olarak döndür
+            const questions = queryResult.rows;
+            console.log('Bilgiler bulundu ve getirildi : ' + questions);
+            res.status(200).json(questions);
+        } else {
+            console.error(error);
+            // Hiçbir soru bulunamadı
+            return res.status(404).json({ status: 404, message: 'Soru bulunamadı' });
+        }
+    });
+});
+
+
+app.post('/api/questionOptions', (req, res) => {
+  const questionId = req.body.question_id;
+
+  // Eğer question_id gönderilmediyse, hata döndür
+  if (!questionId) {
+      return res.status(400).json({ status: 400, message: 'Soru ID gereklidir' });
+  }
+
+  pool.query('SELECT * FROM question_options WHERE question_id = $1', [questionId], (error, queryResult) => {
+      if (error) {
+          console.error(error);
+          return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+      }
+
+      if (queryResult.rows.length > 0) {
+          // Seçenekler bulundu, başarılı olarak döndür
+          const options = queryResult.rows;
+          console.log('OPTIONS : ' ,options);
+
+          res.status(200).json(options);
+      } else {
+          // Belirtilen soru için seçenek bulunamadı
+          return res.status(404).json({ status: 404, message: 'Belirtilen soru için seçenek bulunamadı' });
+      }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /*pool.query('SELECT * FROM questions', (error, res) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+    }
+
+    if (res.rows.length > 0) {
+      // Soru var, soru getirme başarılı
+      console.log('Bilgiler bulundu ve getirildi : ' + res);
+                // Değişkeni response olarak gönder
+          res.status(200).send(res.rows[0]);
+
+    } else {
+      console.error(error);
+      // Kullanıcı yok veya şifre yanlış
+      return res.status(401).json({ status: 401, message: error });
+    }
+  });*/
+
+
+
 
 
   /*

@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor } from '@angular/common/http'
-import { AdminService } from '../services/admin.service';
+import { AdminService } from './admin.service';
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
 

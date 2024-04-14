@@ -5,8 +5,11 @@ body {
   background-size: cover;
   /* Resmi sayfa ortasına hizalar */
   background-position: center;
-  /* Sayfa yüksekliği */
-  height: 1200px;
+  /* Resmi sabit pozisyonda tutar, böylece sonsuza kadar devam eder */
+  background-attachment: fixed;
+  min-height: 1140px; /* Minimum genişlik 1000px */
+  height: auto;
+  
 }
 
 
@@ -28,7 +31,7 @@ body {
   margin-bottom: 1%;
   /* Üst boşluk */
   padding-top: 1%;
-  /* Alt boşluk */
+  /* Alt boşluk*/
   padding-bottom: 1%;
   width: 750px;
   height: 120px;

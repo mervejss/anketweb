@@ -10,7 +10,8 @@ import { AdminService } from '../services/admin.service';
 })
 export class AdminAnaSayfaComponent implements OnInit {
   adminData: any;
-  
+  aktifSayfa: string = ''; // Aktif sayfa bilgisini tutacak değişken
+
 
 
   constructor(private http: HttpClient, private router: Router, private _auth: AdminService) {}
@@ -18,15 +19,20 @@ export class AdminAnaSayfaComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminData = this._auth.getAdminData();
-
+    this._auth.getQuestions();
   }
-  
-
+ 
+ 
   yeniAnketSorusuEkle(): void {
-    
+      this.aktifSayfa = 'admin-anket-duzenle'; // Başında / olmadan rotayı belirtin
+
   }
 
   anketSorulariniGoruntule(): void {
-    
-  }
+    this.aktifSayfa = 'admin-anketler-page1'; // Başında / olmadan rotayı belirtin
+    console.log('ANKET SORULARI GÖRÜNTÜLE FONK ÇALIŞTI !!! -> ', this.aktifSayfa);
+    //this.router.navigate([this.aktifSayfa]); // Yönlendirme için rotayı belirtin
+}
+
+  
 }
