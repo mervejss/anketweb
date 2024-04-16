@@ -10,6 +10,8 @@ import { Page1Component } from './page1/page1.component';
 import { AnaSayfaComponent } from './ana-sayfa/ana-sayfa.component';
 import { AuthGuard } from './services/auth.guard';
 import { AdminAnketlerPage1Component } from './admin-anketler-page1/admin-anketler-page1.component';
+import { NormalKullaniciAnaSayfaComponent } from './normal-kullanici-ana-sayfa/normal-kullanici-ana-sayfa.component';
+import { KullaniciAnketlerPage1Component } from './kullanici-anketler-page1/kullanici-anketler-page1.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'admin-ana-sayfa', component: AdminAnaSayfaComponent },
   { path: 'anket-sayfası-1',  component: Page1Component },
   { path: 'ana-sayfa',  component: AnaSayfaComponent },
-  { path: 'admin-anketler-page1', component: AdminAnketlerPage1Component }
+  { path: 'admin-anketler-page1', component: AdminAnketlerPage1Component },
+  { path: 'kullanici-anketler-page1', component: KullaniciAnketlerPage1Component },
+  { path: 'normal-kullanici-ana-sayfa', component: NormalKullaniciAnaSayfaComponent },
 
   //{ path: 'special',   //canActivate: [AuthGuard], component: AdminAnaSayfaComponent },
 

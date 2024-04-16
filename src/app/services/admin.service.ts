@@ -63,6 +63,7 @@ export class AdminService {
 
   logoutUser() {
     localStorage.removeItem('token');
+    let userData = '';
     this._router.navigate(['/']);
   }
 

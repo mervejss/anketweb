@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NormalKullaniciService } from '../services/normal-kullanici.service';
 
 @Component({
   selector: 'app-kayit-ol',
@@ -8,36 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./kayit-ol.component.css']
 })
 export class KayitOlComponent {
-  username: string = '';
-  surname: string = '';
-  phoneNumber: string = '';
-  email: any;
-  password: any;
+  registerUserData: any = {};
 
-  constructor(private http: HttpClient, private router: Router) {}
 
-  onSubmit() {
-    const data = {
-      firstName: this.username,
-      lastName: this.surname,
-      phoneNumber: this.phoneNumber,
-      email: this.email,
-      password: this.password,
-    };
+  constructor(private http: HttpClient, private Router: Router, private _auth: NormalKullaniciService) {}
 
-    this.http.post<any>('http://localhost:3000/api/users', data, { observe: 'response' }).subscribe(
-      (response: HttpResponse<any>) => {
-        if (response.status === 201) {
-          console.log('Veritabanına kaydedildi', response.body);
-          alert('Kullanıcı başarıyla kaydedildi ! ');
-          this.router.navigate(['/']);
-        } else {
-          console.error('Bilinmeyen bir hata oluştu.');
-        }
+ 
+  registerUser()
+  {
+    console.log(this.registerUserData)
+    this._auth.registerUser(this.registerUserData)
+    .subscribe(
+      res => {
+        console.log("kayıt edildi" + res),
+        localStorage.setItem('token', res.token)
       },
-      (error) => {
-        console.error('Bilinmeyen bir hata oluştu.', error);
-      }
-    );
+      err => console.log(err)
+    )
   }
+
+
 }

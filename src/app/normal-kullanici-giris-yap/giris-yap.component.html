@@ -15,14 +15,14 @@
       <!-- E-posta giriş alanı -->
       <div>
         <label for="email">E-posta Adresi:</label>
-        <input type="text" id="email" required [(ngModel)]="email" name="email">
+        <input type="text" id="email" required [(ngModel)]="loginUserData.email" name="email">
         <!-- Kullanıcıdan e-posta girişi alınıyor -->
       </div>
 
       <!-- Şifre giriş alanı -->
       <div>
         <label for="password">Şifre:</label>
-        <input type="password" id="password" required [(ngModel)]="password" name="password">
+        <input type="password" id="password" required [(ngModel)]="loginUserData.password" name="password">
         <!-- Kullanıcıdan şifre girişi alınıyor -->
       </div>
 

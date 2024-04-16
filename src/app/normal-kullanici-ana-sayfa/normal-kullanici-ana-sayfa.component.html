@@ -1,0 +1,29 @@
+<div class="normal-kullanici-panel">
+    <div class="menu-bar">
+      <img src="/assets/userIcon-removebg-preview.png" alt="Normal Kullanici Logo" class="normal-kullanici-logo" (click)="aktifSayfa = ''">
+      
+        <!-- Normal Kullanıcı bilgilerini yazdırma -->
+        
+        <div>
+          <p>ID: {{ normalKullaniciData.id || " " }}</p>
+          <p>Ad: {{ normalKullaniciData.first_name || " " }}</p>
+          <p>Soyad: {{ normalKullaniciData.last_name|| " " }}</p>
+          <p>Telefon: {{ normalKullaniciData.phone_number   || " " }}</p>
+          <p>E-posta: {{ normalKullaniciData.email|| " " }}</p>
+        </div>
+  
+        <button type="submit"  (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</button>
+    
+      <router-outlet></router-outlet>
+    </div>
+  
+    <div class="anket-sorulari-content">
+      <!-- Anket sorularının içeriği burada<app-admin-anketler-page1 *ngIf="aktifSayfa === 'admin-anket-duzenle'"></app-admin-anketler-page1> -->
+      <app-admin-anketler-page1 *ngIf="aktifSayfa === 'kullanici-anketler-page1'"></app-admin-anketler-page1>
+      
+  
+      <router-outlet></router-outlet>
+    </div> 
+  
+  </div>
+  

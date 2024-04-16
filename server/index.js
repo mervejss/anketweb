@@ -1,16 +1,12 @@
 const express = require('express');
 const User = require('./models/user');
-
 const jwt = require('jsonwebtoken')
-
 const bodyParser = require('body-parser');
 const app = express();
 const { Pool } = require('pg'); // pg modülünü ekledik
 const cors = require('cors'); // cors modülünü ekledik
 app.use(cors()); // CORS başlıklarını ekledik
 app.use(bodyParser.json());
-
-
 
 
 const PORT = process.env.PORT || 3000;
@@ -33,43 +29,100 @@ app.listen(PORT, () => {
 
 
 app.post('/api/users', (req, res) => {
-  const { firstName, lastName, phoneNumber, email, password } = req.body;
-  pool.query('INSERT INTO users (first_name, last_name, phone_number, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-    [firstName, lastName, phoneNumber, email, password],
+  let userData = req.body;
+  let user = new User(userData);
+  console.log(req.body)
+  const { first_name, last_name, phone_number, email, password } = user;
+  pool.query('INSERT INTO users (first_name, last_name, phone_number, email, password) VALUES ($1, $2, $3, $4, $5)',
+    [first_name, last_name, phone_number, email, password],
     (error, results) => {
       if (error) {
         console.error('Veritabanına kayıt eklenirken hata oluştu: ', error);
         return res.status(500).json({ status: 500, message: 'Veritabanına kayıt eklenirken hata oluştu' });
       }
-      console.log('Veritabanına kayıt başarıyla eklendi');
-      const user = results.rows[0];
+      let payload = {subject: results.id}
+      let token = jwt.sign(payload, 'secretKey')
+      res.status(200).send({token})
+      console.log('Normal Kullanici başarıyla kaydedildi');
+      console.log(token);
       
 
-      return res.status(201).json({ status: 201, message: 'Kullanıcı başarıyla eklenmiştir', user });
+      //return res.status(201).json({ status: 201, message: 'Kullanıcı başarıyla eklenmiştir', user });
     });
 });
 
 
 app.post('/api/login', (req, res) => {
-  const { email, password } = req.body;
+  let userData = req.body
 
   // Veritabanında kullanıcının varlığını ve şifresini kontrol et
-  pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password], (error, results) => {
+  pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [userData.email, userData.password], (error, user) => {
     if (error) {
       console.error('Veritabanı hatası: ', error);
       return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
     }
 
-    if (results.rows.length > 0) {
+    if (user.rows.length > 0) {
       // Kullanıcı var, giriş başarılı
-      console.log('Giriş başarılı, Hoş geldiniz');
-      const user = results.rows[0];
+      console.log('Normal Kullanici Giriş başarılı, Hoş geldiniz' + user.rows[0].id, user.rows[0].phone_number);
+      let payload = {subject: user.id}
+      let token = jwt.sign(payload, 'secretKey')
+      res.status(200).send({token})
 
-      return res.status(200).json({ status: 200, message: 'Giriş başarılı', user });
     } else {
       console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
       // Kullanıcı yok veya şifre yanlış
       return res.status(401).json({ status: 401, message: 'E-posta veya şifre hatalı' });
+    }
+  });
+});
+
+  app.post('/api/adminlogin',(req, res) => {
+    let userData = req.body
+  
+    // Veritabanında kullanıcının varlığını ve şifresini kontrol et
+    pool.query('SELECT * FROM admins WHERE email = $1 AND password = $2', [userData.email, userData.password], (error, user) => {
+      if (error) {
+        console.error('Veritabanı hatası: ', error);
+        return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+      }
+  
+      if (user.rows.length > 0) {
+        // Kullanıcı var, giriş başarılı
+        console.log('Giriş başarılı, Hoş geldiniz' + user.rows[0].id, user.rows[0].phone_number);
+        let payload = {subject: user.id}
+        let token = jwt.sign(payload, 'secretKey')
+        res.status(200).send({token})
+
+      } else {
+        console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
+        // Kullanıcı yok veya şifre yanlış
+        return res.status(401).json({ status: 401, message: 'E-posta veya şifre hatalı' });
+      }
+    });
+  });
+app.post('/api/normalKullaniciInfo',(req, res) => {
+  let userData = req.body
+
+     // Veritabanında kullanıcının varlığını ve şifresini kontrol et
+  pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [userData.email, userData.password], (error, user) => {
+    if (error) {
+      console.error('Veritabanı hatası: ', error);
+      return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
+    }
+
+    if (user.rows.length > 0) {
+      // Kullanıcı var, giriş başarılı
+      console.log('Bilgiler bulundu ve getirildi : ' + user.rows[0].id,user.rows[0].first_name,user.rows[0].last_name,user.rows[0].phone_number,user.rows[0].email,user.rows[0].password);
+      const userInfo = user.rows[0];
+
+          // Değişkeni response olarak gönder
+          res.status(200).send(userInfo);
+
+    } else {
+      console.error(error);
+      // Kullanıcı yok veya şifre yanlış
+      return res.status(401).json({ status: 401, message: error });
     }
   });
 });
@@ -96,10 +149,8 @@ app.post('/api/admins', (req, res) => {
   let userData = req.body;
   let user = new User(userData);
   console.log(req.body)
-
   // Kullanıcının özelliklerine erişerek ilgili alanları al
   const { first_name, last_name, phone_number, email, password } = user;
-
   // Veritabanına admini kaydet
   pool.query('INSERT INTO admins (first_name, last_name, phone_number, email, password) VALUES ($1, $2, $3, $4, $5)',
     [first_name, last_name, phone_number, email, password],
@@ -115,8 +166,6 @@ app.post('/api/admins', (req, res) => {
       console.log(token);
       //return res.status(200).json({ status: 200, message: 'Admin başarıyla kaydedildi' });
     });
-
-
   })
 
 
@@ -172,29 +221,6 @@ app.post('/api/admins', (req, res) => {
   });
 
 
-
-
- /* app.get('/api/questions', (req, res) => {
-    pool.query('SELECT * FROM questions', (error, queryResult) => {
-        if (error) {
-            console.error(error);
-            return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
-        }
-
-        if (queryResult.rows.length > 0) {
-            // Soru var, soru getirme başarılı
-            console.log('Bilgiler bulundu ve getirildi : ' + queryResult.rows);
-            // Değişkeni response olarak gönder
-            const questionInfo = queryResult.rows[0];
-
-            res.status(200).send(questionInfo);
-        } else {
-            console.error(error);
-            // Kullanıcı yok veya şifre yanlış
-            return res.status(401).json({ status: 401, message: 'Soru bulunamadı' });
-        }
-    });
-});*/
 app.get('/api/questions', (req, res) => {
     pool.query('SELECT * FROM questions', (error, queryResult) => {
         if (error) {

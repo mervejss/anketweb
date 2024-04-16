@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // HttpClient'ı ekledik
 import { AdminService } from './services/admin.service';
+import { NormalKullaniciService } from './services/normal-kullanici.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit{
   lastName: string = '';
   phoneNumber: string = '';
 
-  constructor(private router: Router, private http: HttpClient, private adminService: AdminService) {} // HttpClient'ı burada da ekledik
+  constructor(private router: Router, private http: HttpClient, private adminService: AdminService, private NormalKullaniciService: AdminService) {} // HttpClient'ı burada da ekledik
 
   ngOnInit(): void {
    
@@ -31,12 +32,15 @@ export class AppComponent implements OnInit{
   }
  showAdminGirisYap() {
   this.adminService.loggedIn
+  this.NormalKullaniciService.loggedIn
+
   //this.router.navigate(['/admin-giris-yap']);
 }
 
 showSistemCikisYap() {
   this.adminService.logoutUser()
-  
+  this.NormalKullaniciService.logoutUser()
+
 }
 
 showSistemGiris() {

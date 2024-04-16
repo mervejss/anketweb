@@ -18,12 +18,14 @@ import { AdminService } from './services/admin.service';
 import { AuthGuard } from './services/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AdminAnketlerPage1Component } from './admin-anketler-page1/admin-anketler-page1.component';
+import { NormalKullaniciAnaSayfaComponent } from './normal-kullanici-ana-sayfa/normal-kullanici-ana-sayfa.component';
+import { KullaniciAnketlerPage1Component } from './kullanici-anketler-page1/kullanici-anketler-page1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent, AdminAnketlerPage1Component,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent, AdminAnketlerPage1Component, NormalKullaniciAnaSayfaComponent, KullaniciAnketlerPage1Component,
     
   ],
   imports: [

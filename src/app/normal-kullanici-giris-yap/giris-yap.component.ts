@@ -1,46 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router'; // Router'ı ekledik
+import { NormalKullaniciService } from '../services/normal-kullanici.service';
 
 @Component({
     selector: 'app-giris-yap',
     templateUrl: './giris-yap.component.html',
     styleUrls: ['./giris-yap.component.css']
 })
-export class GirisYapComponent {
-    email: string = '';
-    password: string = '';
-    sozlesmeOnaylandi: boolean = false; // Yeni eklenen değişken
+export class GirisYapComponent implements OnInit{
+  
 
-    constructor(private http: HttpClient, private router: Router) {}
+  sozlesmeOnaylandi: boolean = false; // Yeni eklenen değişken
 
-    onSubmit() {
-        if (!this.sozlesmeOnaylandi) {
-            // Eğer checkbox işaretli değilse, kullanıcıya uyarı göster
-            alert('Lütfen aydınlatma metnini onaylayın.');
-            return;
-        }
+    ngOnInit() {
+        this.loginUser();
+      }
+      userData: any = {};
 
-        const data = {
-            email: this.email,
-            password: this.password,
-        };
+  loginUserData: any = {};
+    constructor(private http: HttpClient, private router:  Router, private _auth: NormalKullaniciService) {}
 
-        this.http.post<any>('http://localhost:3000/api/login', data).subscribe(
-            (response: HttpResponse<any>) => {
-                if (response.status === 200) {
-                    console.log('Giriş başarılı', response);
-                    alert('Başarıyla giriş yapıldı ! ');
-                    this.router.navigate(['/']);
-
-                    // Giriş başarılıysa yeni sayfaya yönlendirme
-                } else {
-                    console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
-                }
-            },
-            (error) => {
-                console.error('Bilinmeyen bir hata oluştu.', error);
-            }
-        );
+    onSubmit()
+    {
+      if (!this.sozlesmeOnaylandi) {
+        // Eğer checkbox işaretli değilse, kullanıcıya uyarı göster
+        alert('Lütfen aydınlatma metnini onaylayın.');
+        return;
+      }
+      this.loginUser();
     }
+    
+    
+
+    loginUser()
+    {
+      console.log(this.loginUserData);
+            this._auth.loginUser(this.loginUserData)
+              .subscribe(
+                (res: any) => {
+                  console.log("Giriş yapıldı", res);
+                  localStorage.setItem('token', res.token);
+                  this._auth.getUserInfo(this.loginUserData)
+                  .subscribe(
+                    (res: any) => {
+                      console.log("Kullanici verileri alındı", res);
+                      localStorage.setItem('token', res.token);
+                      this.userData = res
+                      this._auth.setUserData(res);
+                      //this._auth.setOnayDurumu(true);
+                      // Admin verileri başarıyla alındı, yönlendirme yapılabilir
+                      this.router.navigate(['/normal-kullanici-ana-sayfa']);
+                    },
+                    err => console.log("Normal Kullanici verileri alınamadı", err)
+                  );
+        
+                },
+                err => console.log(err)
+              );
+          
+        
+
+    }
+
+    
+    
+ 
+    
 }
