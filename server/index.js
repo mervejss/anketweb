@@ -270,7 +270,48 @@ app.post('/api/questionOptions', (req, res) => {
 });
 
 
+// Yeni anket sorusu eklemek için POST isteği
+app.post('/api/surveys/:surveyId/questions', async (req, res) => {
+  const surveyId = req.params.surveyId;
+  const { question_text, question_type, options } = req.body;
 
+  try {
+    const client = await pool.connect();
+
+    // Yeni soruyu sorular tablosuna ekleme
+    const questionQuery = 'INSERT INTO questions (survey_id, question_text, question_type) VALUES ($1, $2, $3) RETURNING id';
+    const questionValues = [surveyId, question_text, question_type];
+    const questionResult = await client.query(questionQuery, questionValues);
+    const questionId = questionResult.rows[0].id;
+
+    // Seçenekleri ekleme
+    const optionsQuery = 'INSERT INTO question_options (question_id, option_text, option_letter, is_correct) VALUES ($1, $2, $3, $4)';
+    for (const option of options) {
+      const optionValues = [questionId, option.option_text, option.option_letter, option.is_correct];
+      await client.query(optionsQuery, optionValues);
+    }
+
+    await client.release();
+
+    res.status(201).json({ message: 'Anket sorusu başarıyla eklendi.' });
+  } catch (err) {
+    console.error('Hata:', err);
+    res.status(500).json({ error: 'Anket sorusu eklenirken bir hata oluştu.' });
+  }
+});
+
+app.get('/usersAll', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM users');
+    const users = result.rows;
+    res.json(users);
+    client.release();
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('Error fetching users from database');
+  }
+});
 
 
 

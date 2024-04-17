@@ -18,17 +18,18 @@ export class NormalKullaniciService {
   _normalKullaniciData: any;
   _questionData: any;
   _questionOptionData: any;
-  _sozlesmeOnaylandi:  any;
+  //_sozlesmeOnaylandi:  any;
 
 
   constructor(private http: HttpClient, private _router: Router) {
     this._normalKullaniciData = JSON.parse(localStorage.getItem('normalKullaniciData') || '{}');
     this._questionData = JSON.parse(localStorage.getItem('questionData') || '{}');
     this._questionOptionData = JSON.parse(localStorage.getItem('questionOptionData') || '{}');
-    this._sozlesmeOnaylandi = JSON.parse(localStorage.getItem('sozlesmeOnaylandi') || '{}');
+    //this._sozlesmeOnaylandi = JSON.parse(localStorage.getItem('sozlesmeOnaylandi') || '{}');
 
   }
 
+  /*
   setOnayDurumu(durum: boolean)
   {
     this._sozlesmeOnaylandi=durum;
@@ -40,6 +41,7 @@ export class NormalKullaniciService {
   {
     return localStorage.getItem('sozlesmeOnaylandi'); 
   }
+  */
   
   getQuestions() {
     return this.http.get<any>(this._anketSorulari1Url);

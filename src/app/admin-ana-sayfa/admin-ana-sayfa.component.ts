@@ -24,13 +24,17 @@ export class AdminAnaSayfaComponent implements OnInit {
  
  
   yeniAnketSorusuEkle(): void {
-      this.aktifSayfa = 'admin-anket-duzenle'; // Başında / olmadan rotayı belirtin
+      this.aktifSayfa = 'admin-anket-ekle-duzenle'; // Başında / olmadan rotayı belirtin
 
   }
+  kullanicilariGoruntule(): void {
+    this.aktifSayfa = 'kullanicilari-goruntule'; // Başında / olmadan rotayı belirtin
+
+}
 
   anketSorulariniGoruntule(): void {
     this.aktifSayfa = 'admin-anketler-page1'; // Başında / olmadan rotayı belirtin
-    console.log('ANKET SORULARI GÖRÜNTÜLE FONK ÇALIŞTI !!! -> ', this.aktifSayfa);
+    //console.log('ANKET SORULARI GÖRÜNTÜLE FONK ÇALIŞTI !!! -> ', this.aktifSayfa);
     //this.router.navigate([this.aktifSayfa]); // Yönlendirme için rotayı belirtin
 }
 

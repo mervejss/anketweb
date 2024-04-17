@@ -14,14 +14,17 @@
 
       <button type="submit" (click)="yeniAnketSorusuEkle()">Yeni Anket Sorusu Ekle</button>
       <button type="submit"  (click)="anketSorulariniGoruntule()">Anket Sorularını Görüntüle</button>
-  
+      <button type="submit"  (click)="kullanicilariGoruntule()">Kullanıcıları Görüntüle</button>
+
     <router-outlet></router-outlet>
   </div>
 
   <div class="anket-sorulari-content">
     <!-- Anket sorularının içeriği burada<app-admin-anketler-page1 *ngIf="aktifSayfa === 'admin-anket-duzenle'"></app-admin-anketler-page1> -->
     <app-admin-anketler-page1 *ngIf="aktifSayfa === 'admin-anketler-page1'"></app-admin-anketler-page1>
-    
+    <app-admin-anket-ekle-duzenle *ngIf="aktifSayfa === 'admin-anket-ekle-duzenle'"></app-admin-anket-ekle-duzenle>
+    <app-kullanicilari-goruntule *ngIf="aktifSayfa === 'kullanicilari-goruntule'"></app-kullanicilari-goruntule>
+
 
     <router-outlet></router-outlet>
   </div> 

@@ -12,7 +12,7 @@ export class KullaniciAnketlerPage1Component implements OnInit {
 
   questionData: any[] = [];
   questionOptionData: any[] = [];
-  
+
   constructor(private http: HttpClient, private router: Router, private _auth: AdminService) { }
 
   ngOnInit(): void {
@@ -52,5 +52,7 @@ export class KullaniciAnketlerPage1Component implements OnInit {
         err => console.log("Seçenek verileri alınamadı", err)
     );
   }  
+ 
+  
   
 }

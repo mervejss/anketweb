@@ -11,7 +11,7 @@ import { NormalKullaniciService } from '../services/normal-kullanici.service';
 export class GirisYapComponent implements OnInit{
   
 
-  sozlesmeOnaylandi: boolean = false; // Yeni eklenen değişken
+  sozlesmeOnaylandi: boolean = true; // Yeni eklenen değişken
 
     ngOnInit() {
         this.loginUser();
@@ -23,7 +23,7 @@ export class GirisYapComponent implements OnInit{
 
     onSubmit()
     {
-      if (!this.sozlesmeOnaylandi) {
+      if (!this.sozlesmeOnaylandi ) {
         // Eğer checkbox işaretli değilse, kullanıcıya uyarı göster
         alert('Lütfen aydınlatma metnini onaylayın.');
         return;
@@ -48,6 +48,7 @@ export class GirisYapComponent implements OnInit{
                       localStorage.setItem('token', res.token);
                       this.userData = res
                       this._auth.setUserData(res);
+                      
                       //this._auth.setOnayDurumu(true);
                       // Admin verileri başarıyla alındı, yönlendirme yapılabilir
                       this.router.navigate(['/normal-kullanici-ana-sayfa']);
