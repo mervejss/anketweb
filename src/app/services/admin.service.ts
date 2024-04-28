@@ -1,3 +1,4 @@
+//C:\angular\anketweb-main\src\app\services\admin.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -28,8 +29,8 @@ export class AdminService {
 
   }
 
-  getQuestions() {
-    return this.http.get<any>(this._anketSorulari1Url);
+  getQuestions(tiklananAnketId: number) {
+    return this.http.post<any>(this._anketSorulari1Url, { tiklananAnketId: tiklananAnketId });
   }
 
   

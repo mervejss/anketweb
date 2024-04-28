@@ -4,7 +4,13 @@
     padding: 15px; /* İçeriğin etrafındaki dolgular */
     border-radius: 8px; /* Köşelerin yuvarlatılması */
   }
-  
+  .main-container {
+    margin-bottom: 20px; /* Sorular arası boşluk */
+    background-color: #87c1f7; /* Arka plan rengi */
+    padding: 15px; /* İçeriğin etrafındaki dolgular */
+    border-radius: 8px; /* Köşelerin yuvarlatılması */
+  }
+
   .option-label {
     display: block;
     margin-top: 5px; /* Seçenekler arası boşluk */

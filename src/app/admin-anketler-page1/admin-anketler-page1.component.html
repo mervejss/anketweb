@@ -1,11 +1,21 @@
-<div *ngFor="let question of questionData; let i = index" class="question-container">
-  <p>{{ i + 1 }}. {{ question.question_text }}</p>
-  <div *ngFor="let item of questionOptionData">
-    <div *ngIf="item.questionId === question.id">
-      <label *ngFor="let option of item.options" class="option-label">
-        <input type="radio" [value]="option.id" name="options" disabled>
-        {{ option.option_text }}
-      </label>
+<div class="main-container">
+  <div class="survey-title">
+    <h2>ANKET ID: {{ tiklananAnketId }}</h2>
+  </div>
+  <div *ngFor="let question of questionData; let i = index" class="question-container">
+    <div class="question-header">
+      <span class="edit-icon" (click)="editQuestion()">
+        <i class="fas fa-pencil-alt"></i>
+      </span>
+      <p>{{ i + 1 }}. {{ question.question_text }}</p>
+    </div>
+    <div *ngFor="let item of questionOptionData">
+      <div *ngIf="item.questionId === question.id">
+        <label *ngFor="let option of item.options" class="option-label">
+          <input type="radio" [value]="option.id" name="options" disabled>
+          {{ option.option_text }}
+        </label>
+      </div>
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ export class KullaniciAnketlerPage1Component implements OnInit {
   }
 
   getQuestions() {
-    this._auth.getQuestions()
+    this._auth.getQuestions(2)
         .subscribe(
             (res: any[]) => {
                 console.log("Soru verileri alındı", res);

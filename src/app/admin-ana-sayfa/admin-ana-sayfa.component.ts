@@ -19,7 +19,7 @@ export class AdminAnaSayfaComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminData = this._auth.getAdminData();
-    this._auth.getQuestions();
+    //this._auth.getQuestions();
   }
  
  

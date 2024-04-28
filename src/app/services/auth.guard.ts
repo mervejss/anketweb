@@ -1,3 +1,4 @@
+//C:\angular\anketweb-main\src\app\services\auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AdminService } from './admin.service';

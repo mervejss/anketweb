@@ -1,3 +1,4 @@
+//C:\angular\anketweb-main\src\app\services\normal-kullanici.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';

@@ -1,20 +1,19 @@
-<!--anketweb-main/src/app/admin-anket-ekle-duzenle/admin-anket-ekle-duzenle.component.html 
-bu HTML DOSYASI DOLDURULACAK UYGUN ŞEKİLDE.
--->
-<!-- admin-anket-ekle-duzenle.component.html -->
-<form (ngSubmit)="onSubmit(surveyId, questionText, questionType, options)">
-    <label for="questionText">Anket Sorusu Metni:</label>
-    <input type="text" id="questionText" name="questionText" [(ngModel)]="questionText" required>
-  
-    <label for="questionType">Soru Tipi:</label>
-    <input type="text" id="questionType" name="questionType" [(ngModel)]="questionType" required>
-  
-    <!-- Options için giriş alanları -->
-    <div *ngFor="let option of options; let i = index">
-      <label for="option{{i}}">Seçenek {{i + 1}}:</label>
-      <input type="text" id="option{{i}}" name="option{{i}}" [(ngModel)]="option.option_text" required>
-    </div>
-  
-    <button type="submit">Soruyu Ekle</button>
-  </form>
-  
+<!-- C:\angular\anketweb-main\src\app\admin-anket-ekle-duzenle\admin-anket-ekle-duzenle.component.html -->
+
+<div class="survey-container">
+  <h2>Anketler</h2>
+  <div *ngFor="let survey of surveys" class="survey" (click)="onSurveyClick(survey.id)">
+    <h3>Anket ID  : {{ survey.id }}</h3>
+    <p>Anket Adı : {{ survey.survey_name }}</p>
+    <p>Anketi Oluşturan Yönetici ID : {{ survey.admin_id }}</p>
+    <p>Anketin Oluşturulma Tarihi: {{ survey.created_at }}</p>
+
+    
+  </div>
+  <div class="anket-sorulari-content">
+    <!-- Anket sorularının içeriği burada<app-admin-anketler-page1 *ngIf="aktifSayfa === 'admin-anket-duzenle'"></app-admin-anketler-page1> -->
+    <app-admin-anketler-page1 *ngIf="aktifSayfa === 'admin-anketler-page1'" [tiklananAnketId]="tiklananAnketId"></app-admin-anketler-page1>
+    
+    <router-outlet></router-outlet>
+  </div>
+</div>
