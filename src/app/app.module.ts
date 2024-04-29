@@ -23,12 +23,13 @@ import { KullaniciAnketlerPage1Component } from './kullanici-anketler-page1/kull
 import { AdminAnketEkleDuzenleComponent } from './admin-anket-ekle-duzenle/admin-anket-ekle-duzenle.component';
 import { KullanicilariGoruntuleComponent } from './kullanicilari-goruntule/kullanicilari-goruntule.component';
 import { KullaniciDetaylariComponent } from './kullanici-detaylari/kullanici-detaylari.component';
+import { AdminAnketEkleComponent } from './admin-anket-ekle/admin-anket-ekle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KayitOlComponent, 
-    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent, AdminAnketlerPage1Component, NormalKullaniciAnaSayfaComponent, KullaniciAnketlerPage1Component, AdminAnketEkleDuzenleComponent, KullanicilariGoruntuleComponent, KullaniciDetaylariComponent,
+    GirisYapComponent, AdminGirisYapComponent, AdminKayitOlComponent,AdminAnaSayfaComponent, Page1Component, AnaSayfaComponent, AdminAnketlerPage1Component, NormalKullaniciAnaSayfaComponent, KullaniciAnketlerPage1Component, AdminAnketEkleDuzenleComponent, KullanicilariGoruntuleComponent, KullaniciDetaylariComponent, AdminAnketEkleComponent,
     
   ],
   imports: [

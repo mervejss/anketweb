@@ -15,6 +15,7 @@ import { KullaniciAnketlerPage1Component } from './kullanici-anketler-page1/kull
 import { AdminAnketEkleDuzenleComponent } from './admin-anket-ekle-duzenle/admin-anket-ekle-duzenle.component';
 import { KullanicilariGoruntuleComponent } from './kullanicilari-goruntule/kullanicilari-goruntule.component';
 import { KullaniciDetaylariComponent } from './kullanici-detaylari/kullanici-detaylari.component';
+import { AdminAnketEkleComponent } from './admin-anket-ekle/admin-anket-ekle.component';
 
 const routes: Routes = [
   //{ path: 'ana-sayfa',  component: AppComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'admin-anket-ekle-duzenle', component: AdminAnketEkleDuzenleComponent },
   { path: 'kullanicilari-goruntule', component: KullanicilariGoruntuleComponent },
   { path: 'kullanici-detaylari', component: KullaniciDetaylariComponent },
+  { path: 'admin-anket-ekle', component: AdminAnketEkleComponent },
 
   //{ path: 'special',   //canActivate: [AuthGuard], component: AdminAnaSayfaComponent },
 

@@ -23,7 +23,7 @@ export class AdminAnaSayfaComponent implements OnInit {
   }
  
  
-  yeniAnketSorusuEkle(): void {
+  anketleriGoruntule(): void {
       this.aktifSayfa = 'admin-anket-ekle-duzenle'; // Başında / olmadan rotayı belirtin
 
   }
@@ -32,8 +32,8 @@ export class AdminAnaSayfaComponent implements OnInit {
 
 }
 
-  anketSorulariniGoruntule(): void {
-    this.aktifSayfa = 'admin-anketler-page1'; // Başında / olmadan rotayı belirtin
+  anketSorusuEkle(): void {
+    this.aktifSayfa = 'admin-anket-ekle'; // Başında / olmadan rotayı belirtin
     //console.log('ANKET SORULARI GÖRÜNTÜLE FONK ÇALIŞTI !!! -> ', this.aktifSayfa);
     //this.router.navigate([this.aktifSayfa]); // Yönlendirme için rotayı belirtin
 }

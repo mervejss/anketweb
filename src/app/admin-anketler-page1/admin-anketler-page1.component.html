@@ -4,9 +4,6 @@
   </div>
   <div *ngFor="let question of questionData; let i = index" class="question-container">
     <div class="question-header">
-      <span class="edit-icon" (click)="editQuestion()">
-        <i class="fas fa-pencil-alt"></i>
-      </span>
       <p>{{ i + 1 }}. {{ question.question_text }}</p>
     </div>
     <div *ngFor="let item of questionOptionData">
