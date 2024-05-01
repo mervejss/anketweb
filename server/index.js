@@ -71,6 +71,7 @@ app.post('/api/login', (req, res) => {
 
     } else {
       console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
+
       // Kullanıcı yok veya şifre yanlış
       return res.status(401).json({ status: 401, message: 'E-posta veya şifre hatalı' });
     }
