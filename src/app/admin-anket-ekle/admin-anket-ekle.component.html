@@ -36,17 +36,24 @@
   <div class="container">
     <h2>ANKET SORUSUNU GÜNCELLE</h2>
     <form>
+      
       <div class="form-group">
         <label for="anketId">Anket ID:</label>
-        <input type="text" id="anketId" name="anketId" class="form-control" [(ngModel)]="anketId">
+        <input type="text" id="anketId" name="anketId" class="form-control" [(ngModel)]="guncellenecekanketId">
+      </div>
+
+      <div class="form-group">
+        <label for="soruId">Soru ID:</label>
+        <input type="text" id="soruId" name="soruId" class="form-control" [(ngModel)]="guncelleneceksoruId">
+      </div>
+
+      <div class="form-group">
+        <label for="soruIcerigi">Soru YENİ İçeriği:</label>
+        <input type="text" id="soruIcerigi" name="soruIcerigi" class="form-control" [(ngModel)]="guncelleneceksoruIcerigi">
       </div>
       <div class="form-group">
-        <label for="soruIcerigi">Soru İçeriği:</label>
-        <input type="text" id="soruIcerigi" name="soruIcerigi" class="form-control" [(ngModel)]="soruIcerigi">
-      </div>
-      <div class="form-group">
-        <label for="soruTipi">Soru Tipi:</label>
-        <input type="text" id="soruTipi" name="soruTipi" class="form-control" [(ngModel)]="soruTipi">
+        <label for="soruTipi">Soru YENİ Tipi:</label>
+        <input type="text" id="soruTipi" name="soruTipi" class="form-control" [(ngModel)]="guncelleneceksoruTipi">
       </div>
       <button class="btn btn-primary" (click)="anketSorusuGuncelle()">Anket Sorusunu Güncelle</button>
     </form>
@@ -59,7 +66,7 @@
     <form>
       <div class="form-group">
         <label for="soruId">Soru ID:</label>
-        <input type="text" id="soruId" name="soruId" class="form-control" [(ngModel)]="soruId">
+        <input type="text" id="soruId" name="soruId" class="form-control" [(ngModel)]="soruSeceneksoruId">
       </div>
       <div class="form-group">
         <label for="soruSecenekIcerigi">Soru Seçeneği İçeriği:</label>
@@ -81,19 +88,25 @@
     <form>
       <div class="form-group">
         <label for="soruId">Soru ID:</label>
-        <input type="text" id="soruId" name="soruId" class="form-control" [(ngModel)]="soruId">
+        <input type="text" id="soruId" name="soruId" class="form-control" [(ngModel)]="guncellenecekseceneksoruId">
+      </div>
+      
+      <div class="form-group">
+        <label for="soruSecenekId">Soru Seçeneği ID:</label>
+        <input type="text" id="soruSecenekId" name="soruSecenekId" class="form-control" [(ngModel)]="guncellenecekseceneksoruSecenekId">
+      </div>
+
+      <div class="form-group">
+        <label for="soruSecenekIcerigi">Soru Seçeneği YENİ İçeriği:</label>
+        <input type="text" id="soruSecenekIcerigi" name="soruSecenekIcerigi" class="form-control" [(ngModel)]="guncellenecekseceneksoruSecenekIcerigi">
       </div>
       <div class="form-group">
-        <label for="soruSecenekIcerigi">Soru Seçeneği İçeriği:</label>
-        <input type="text" id="soruSecenekIcerigi" name="soruSecenekIcerigi" class="form-control" [(ngModel)]="soruSecenekIcerigi">
+        <label for="soruSecenekSikki">Soru Seçeneği YENİ Şıkkı:</label>
+        <input type="text" id="soruSecenekSikki" name="soruSecenekSikki" class="form-control" [(ngModel)]="guncellenecekseceneksoruSecenekSikki">
       </div>
       <div class="form-group">
-        <label for="soruSecenekSikki">Soru Seçeneği Şıkkı:</label>
-        <input type="text" id="soruSecenekSikki" name="soruSecenekSikki" class="form-control" [(ngModel)]="soruSecenekSikki">
-      </div>
-      <div class="form-group">
-        <label for="soruSecenekDurumu">Soru Seçeneği Durumu:</label>
-        <input type="text" id="soruSecenekDurumu" name="soruSecenekDurumu" class="form-control" [(ngModel)]="soruSecenekDurumu">
+        <label for="soruSecenekDurumu">Soru Seçeneği YENİ Durumu:</label>
+        <input type="text" id="soruSecenekDurumu" name="soruSecenekDurumu" class="form-control" [(ngModel)]="guncellenecekseceneksoruSecenekDurumu">
       </div>
       <button class="btn btn-primary" (click)="soruSecenegiGuncelle()">Anket Sorusunun Seçeneğini Güncelle</button>
     </form>

@@ -306,122 +306,78 @@ app.get('/api/surveys', async (req, res) => {
 
 
 
+app.post('/api/createSurvey', async (req, res) => {
+  try {
+    const { survey_name, admin_id } = req.body;
+    const queryText = 'INSERT INTO surveys (survey_name, admin_id) VALUES ($1, $2) RETURNING *';
+    const values = [survey_name, admin_id];
+    const result = await pool.query(queryText, values);
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Error creating survey');
+  }
+});
+
+app.post('/api/createQuestion', async (req, res) => {
+  try {
+    const { survey_id, question_text, question_type } = req.body;
+    const queryText = 'INSERT INTO questions (survey_id, question_text, question_type) VALUES ($1, $2, $3) RETURNING *';
+    const values = [survey_id, question_text, question_type];
+    const result = await pool.query(queryText, values);
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Error creating question');
+  }
+});
+
+// Soruyu güncellemek için PUT isteği
+app.put('/api/updateQuestion/:id', async (req, res) => {
+  try {
+    const questionId = req.params.id;
+    const { survey_id, question_text, question_type } = req.body;
+    const queryText = 'UPDATE questions SET survey_id = $1, question_text = $2, question_type = $3, last_updated_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *';
+    const values = [survey_id, question_text, question_type, questionId];
+    const result = await pool.query(queryText, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Error updating question');
+  }
+});
 
 
+// Yeni bir soru seçeneği oluşturmak için POST isteği
+app.post('/api/createQuestionOption', async (req, res) => {
+  try {
+    const { question_id, option_text, option_letter, is_correct } = req.body;
+    const queryText = 'INSERT INTO question_options (question_id, option_text, option_letter, is_correct) VALUES ($1, $2, $3, $4) RETURNING *';
+    const values = [question_id, option_text, option_letter, is_correct];
+    const result = await pool.query(queryText, values);
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Error creating question option');
+  }
+});
 
-
-
-   /*pool.query('SELECT * FROM questions', (error, res) => {
-    if (error) {
-      console.error(error);
-      return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
-    }
-
-    if (res.rows.length > 0) {
-      // Soru var, soru getirme başarılı
-      console.log('Bilgiler bulundu ve getirildi : ' + res);
-                // Değişkeni response olarak gönder
-          res.status(200).send(res.rows[0]);
-
-    } else {
-      console.error(error);
-      // Kullanıcı yok veya şifre yanlış
-      return res.status(401).json({ status: 401, message: error });
-    }
-  });*/
-
-
-
-
-
-  /*
-  app.post('/api/adminLogin', (req, res) => {
-    let userData = req.body
-    pool.query('SELECT * FROM admins WHERE email = $1 AND password = $2', [userData.email, userData.password], (err, user) => {
-      if (err) {
-        console.log(err)    
-      } else {
-        if (!user) {
-          res.status(401).send('Invalid Email')
-        } else 
-        if ( user.password !== userData.password) {
-          res.status(401).send('Invalid Password')
-        } else {
-          let payload = {subject: user.id}
-          let token = jwt.sign(payload, 'secretKey')
-          res.status(200).send({token})
-        }
-      }
-    });
-  })
-*/
-
-  // Veritabanında kullanıcının varlığını ve şifresini kontrol et
-
-
-
-
-/*app.post('/api/admins', (req, res) => {
-  const { first_name, last_name, phone_number, email, password } = req.body;
-
-  // Veritabanına admini kaydet
-  pool.query('INSERT INTO admins (first_name, last_name, phone_number, email, password) VALUES ($1, $2, $3, $4, $5)',
-    [first_name, last_name, phone_number, email, password],
-    (error, results) => {
-      if (error) {
-        console.error('Veritabanı hatası: ', error);
-        return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
-      }
-
-      console.log('Admin başarıyla kaydedildi');
-      return res.status(200).json({ status: 200, message: 'Admin başarıyla kaydedildi' });
-    });
+// Soru seçeneğini güncellemek için PUT isteği
+app.put('/api/updateQuestionOption/:id', async (req, res) => {
+  try {
+    const optionId = req.params.id;
+    const { question_id, option_text, option_letter, is_correct } = req.body;
+    const queryText = 'UPDATE question_options SET question_id = $1, option_text = $2, option_letter = $3, is_correct = $4, last_updated_at = CURRENT_TIMESTAMP WHERE id = $5 RETURNING *';
+    const values = [question_id, option_text, option_letter, is_correct, optionId];
+    const result = await pool.query(queryText, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Error updating question option');
+  }
 });
 
 
 
-app.post('/api/adminlogin', (req, res) => {
-  const { email, password } = req.body;
 
-  // Veritabanında kullanıcının varlığını ve şifresini kontrol et
-  pool.query('SELECT * FROM admins WHERE email = $1 AND password = $2', [email, password], (error, results) => {
-    if (error) {
-      console.error('Veritabanı hatası: ', error);
-      return res.status(500).json({ status: 500, message: 'Bir hata oluştu' });
-    }
 
-    if (results.rows.length > 0) {
-      // Kullanıcı var, giriş başarılı
-      console.log('Giriş başarılı, Hoş geldiniz');
-      const admin = results.rows[0];
-
-      return res.status(200).json({ status: 200, message: 'Giriş başarılı', admin });
-    } else {
-      console.error('Hatalı giriş bilgileri !! Bilgilerinizi kontrol ediniz !');
-      // Kullanıcı yok veya şifre yanlış
-      return res.status(401).json({ status: 401, message: 'E-posta veya şifre hatalı' });
-    }
-  });
-});
-*/
-// Define the endpoint for retrieving admin information by ID
-/*app.get('/api/admins/:adminId', (req, res) => {
-  const { adminId } = req.params;
-
-  // Query the database to retrieve admin information
-  pool.query('SELECT * FROM admins WHERE id = $1', [adminId], (error, results) => {
-    if (error) {
-      console.error('Error retrieving admin information:', error);
-      return res.status(500).json({ status: 500, message: 'Error retrieving admin information' });
-    }
-
-    // Check if admin with the given ID exists
-    if (results.rows.length === 0) {
-      return res.status(404).json({ status: 404, message: 'Admin not found' });
-    }
-
-    // Admin found, return the admin information
-    const admin = results.rows[0];
-    return res.status(200).json({ status: 200, message: 'Admin information retrieved successfully', admin });
-  });
-});*/
